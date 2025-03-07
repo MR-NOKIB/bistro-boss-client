@@ -5,7 +5,6 @@ import NavBar from '../pages/shared/NavBar/NavBar';
 
 const Main = () => {
     const location = useLocation();
-    console.log(location);
     if(location.pathname.includes('login') || location.pathname.includes('signup')){
         return <Outlet></Outlet>
     }

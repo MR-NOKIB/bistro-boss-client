@@ -1,19 +1,27 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../providers/AuthProvider';
+import { MdOutlineShoppingCart } from "react-icons/md";
 
 const NavBar = () => {
     const { user, logOut } = useContext(AuthContext);
     const handleLogOut = () => {
         logOut()
-        .then(() => {})
-        .catch(err => console.error(err))
+            .then(() => { })
+            .catch(err => console.error(err))
     }
 
     const navOptions = <>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/menu">Our Menu</Link></li>
         <li><Link to="/order/salad">Order</Link></li>
+        <li>
+            <Link>
+                <button className="btn">
+                    <MdOutlineShoppingCart className='text-2xl' /><div className="badge badge-sm badge-secondary">+0</div>
+                </button>
+            </Link>
+        </li>
         {
             user ? <>
                 <button onClick={handleLogOut} className='btn btn-outline border-0 border-b-4 bg-slate-100 hover:bg-black text-yellow-600 shadow-2xl'>Logout</button>
@@ -39,7 +47,7 @@ const NavBar = () => {
                     <a className="btn btn-ghost text-xl">Bistro Boss</a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
-                    <ul className="menu menu-horizontal px-1">
+                    <ul className="menu menu-horizontal px-1 flex items-center">
                         {navOptions}
                     </ul>
                 </div>
