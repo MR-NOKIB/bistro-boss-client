@@ -59,7 +59,7 @@ const Login = () => {
                     <img src={loginImg} alt="" />
                 </div>
                 <div onSubmit={handleLogin} className="card md:w-1/2 max-w-sm shrink-0 items-center">
-                    <h1 className="text-5xl font-bold">Login now!</h1>
+                    <h1 className="text-5xl font-bold text-black">Login now!</h1>
                     <form className="card-body w-full">
                         <fieldset className="fieldset">
                             <label className="fieldset-label">Email</label>
