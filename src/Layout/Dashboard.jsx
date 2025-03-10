@@ -6,7 +6,7 @@ import useAdmin from "../Hooks/useAdmin";
 const Dashboard = () => {
 
     // get is admin value from the database
-    const isAdmin = useAdmin();
+    const [isAdmin] = useAdmin();
 
     return (
         <div className="flex min-h-screen">
@@ -14,7 +14,7 @@ const Dashboard = () => {
             <div className="w-80 min-h-full bg-[#D1A054] px-4 py-4">
                 <ul className="menu gap-4 text-xl">
                     {
-                        !isAdmin ? <>
+                        isAdmin ? <>
                             <li className="">
                                 <NavLink to="/dashboard/adminHome">
                                     <FaHome />
