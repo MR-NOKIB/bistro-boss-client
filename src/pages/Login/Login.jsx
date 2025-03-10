@@ -5,11 +5,12 @@ import loginImg from '../../assets/others/authentication2.png';
 import { AuthContext } from '../../providers/AuthProvider';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import SocialLogin from '../../Components/SocialLogin/SocialLogin';
 
 const Login = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    let from =  location.state?.from?.pathname || "/"
+    let from = location.state?.from?.pathname || "/"
     const { signIn } = useContext(AuthContext);
     const captchaRef = useRef(null);
     const [disabled, setDisabled] = useState(true);
@@ -31,7 +32,7 @@ const Login = () => {
                     showConfirmButton: false,
                     timer: 1500
                 });
-                navigate(from, {replace: true})
+                navigate(from, { replace: true })
             })
             .catch(err => console.error(err)
             )
@@ -53,31 +54,34 @@ const Login = () => {
     }
 
     return (
-        <div className="hero bg-base-200 min-h-screen p-16 my-16" style={{ backgroundImage: `url(${loginBg})`, backgroundSize: 'cover' }}>
-            <div className="hero-content flex-col lg:flex-row h-full w-full border justify-between px-20">
+        <div className="hero bg-base-200 min-h-screen  p-20 my-16" style={{ backgroundImage: `url(${loginBg})`, backgroundSize: 'cover' }}>
+            <div className="hero-content flex-col lg:flex-row h-full w-full border justify-between  px-20 py-8 shadow-2xl shadow-slate-600">
                 <div className="text-center lg:text-left md:w-1/2">
                     <img src={loginImg} alt="" />
                 </div>
-                <div onSubmit={handleLogin} className="card md:w-1/2 max-w-sm shrink-0 items-center">
-                    <h1 className="text-5xl font-bold text-black">Login now!</h1>
+                <div onSubmit={handleLogin} className="card md:w-1/2 max-w-sm shrink-0 items-center shadow-lg shadow-slate-600 py-4">
+                    <h1 className="text-5xl font-bold text-black text-center">Login now!</h1>
                     <form className="card-body w-full">
                         <fieldset className="fieldset">
                             <label className="fieldset-label">Email</label>
-                            <input type="email" name='email' className="input" placeholder="Email" />
+                            <input type="email" name='email' className="input w-full" placeholder="Email" />
 
                             <label className="fieldset-label">Password</label>
-                            <input type="password" name='password' className="input" placeholder="Password" />
+                            <input type="password" name='password' className="input w-full" placeholder="Password" />
 
                             <label className="fieldset-label"> < LoadCanvasTemplateNoReload /> </label>
-                            <input onBlur={handleValidateCaptcha} type="text" ref={captchaRef} name='captcha' className="input" placeholder="Type the Captcha Above" />
+                            <input onBlur={handleValidateCaptcha} type="text" ref={captchaRef} name='captcha' className="input w-full" placeholder="Type the Captcha Above" />
 
                             <div><a className="link link-hover">Forgot password?</a></div>
 
-                            <input disabled={disabled} className="btn btn-neutral mt-4" type="submit" value="Login" />
+                            <input disabled={false} className="btn btn-neutral mt-4" type="submit" value="Login" />
 
+                            <div className="divider divider-neutral text-slate-800 font-semibold">OR</div>
+
+                            <SocialLogin></SocialLogin>
                         </fieldset>
                     </form>
-                    <p><small>New Here? <Link className='underline text-blue-700' to="/signup">Create an account</Link></small></p>
+                    <p className='text-black'><small>New Here? <Link className='underline text-blue-700' to="/signup">Create an account</Link></small></p>
                 </div>
             </div>
         </div>
