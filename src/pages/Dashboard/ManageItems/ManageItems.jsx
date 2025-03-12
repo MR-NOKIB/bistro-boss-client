@@ -4,10 +4,13 @@ import useMenu from '../../../Hooks/useMenu';
 import { FaTrashAlt } from 'react-icons/fa';
 import { TbEdit } from "react-icons/tb";
 import Swal from 'sweetalert2';
+import useAxiosSecure from '../../../Hooks/useAxiosSecure';
+import { Link } from 'react-router-dom';
 
 const ManageItems = () => {
-    const [menu] = useMenu();
-    const handleDeleteItem = item => {
+    const [menu, , refetch] = useMenu();
+    const axiosSecure = useAxiosSecure();
+    const handleDeleteItem = async (item) => {
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -16,13 +19,19 @@ const ManageItems = () => {
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, delete it!"
-        }).then((result) => {
+        }).then(async (result) => {
             if (result.isConfirmed) {
-                // Swal.fire({
-                //     title: "Deleted!",
-                //     text: "Your file has been deleted.",
-                //     icon: "success"
-                // });
+                const res = await axiosSecure.delete(`/menu/${item._id}`);
+                if (res.data.deletedCount > 0) {
+                    // refetch to update the ui
+                    refetch();
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: `${item.name} has been deleted`,
+                        icon: "success"
+                    });
+                    console.log(res.data)
+                }
             }
         });
     }
@@ -63,11 +72,13 @@ const ManageItems = () => {
                                     <td className=''>{item.price}</td>
 
                                     <td>
-                                        <button
-                                            className="rounded px-2 py-2 bg-[#D1A054] hover:bg-[#f2cb92da]"
-                                        >
-                                            <TbEdit className='text-xl' />
-                                        </button>
+                                        <Link to={`/dashboard/updateItem/${item._id}`}>
+                                            <button
+                                                className="rounded px-2 py-2 bg-[#D1A054] hover:bg-[#f2cb92da]"
+                                            >
+                                                <TbEdit className='text-xl' />
+                                            </button>
+                                        </Link>
                                     </td>
                                     <td>
                                         <button
