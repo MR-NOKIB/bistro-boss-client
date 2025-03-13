@@ -65,7 +65,7 @@ const SignUp = () => {
                 </div>
                 <div className="card md:w-1/2 max-w-sm shrink-0 items-center shadow-lg shadow-slate-600 py-4">
                     <h1 className="text-5xl font-bold text-slate-900">Sign Up!</h1>
-                    <form onSubmit={handleSubmit(onSubmit)} className="card-body w-full">
+                    <form onSubmit={handleSubmit(onSubmit)} className="card-body w-full pb-0">
                         <fieldset className="fieldset">
                             <label className="fieldset-label">Name</label>
                             <input type="text" {...register("name", { required: true })} name='name' className="input w-full" placeholder="Name" />
@@ -96,10 +96,9 @@ const SignUp = () => {
                             <input className="btn btn-neutral mt-4" type="submit" value="Sign Up" />
 
                             <div className="divider divider-neutral text-slate-800 font-semibold">OR</div>
-                            <SocialLogin></SocialLogin>
-
                         </fieldset>
                     </form>
+                    <SocialLogin></SocialLogin>
                     <p><small className='text-black'>Already have an account? <Link className='underline text-blue-700' to="/login">Login here</Link></small></p>
                 </div>
             </div>

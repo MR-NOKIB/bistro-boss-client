@@ -61,7 +61,7 @@ const Login = () => {
                 </div>
                 <div onSubmit={handleLogin} className="card md:w-1/2 max-w-sm shrink-0 items-center shadow-lg shadow-slate-600 py-4">
                     <h1 className="text-5xl font-bold text-black text-center">Login now!</h1>
-                    <form className="card-body w-full">
+                    <form className="card-body w-full pb-0">
                         <fieldset className="fieldset">
                             <label className="fieldset-label">Email</label>
                             <input type="email" name='email' className="input w-full" placeholder="Email" />
@@ -77,11 +77,10 @@ const Login = () => {
                             <input disabled={false} className="btn btn-neutral mt-4" type="submit" value="Login" />
 
                             <div className="divider divider-neutral text-slate-800 font-semibold">OR</div>
-
-                            <SocialLogin></SocialLogin>
                         </fieldset>
                     </form>
-                    <p className='text-black'><small>New Here? <Link className='underline text-blue-700' to="/signup">Create an account</Link></small></p>
+                    <SocialLogin></SocialLogin>
+                    <p className='text-black mt-3'><small>New Here? <Link className='underline text-blue-700' to="/signup">Create an account</Link></small></p>
                 </div>
             </div>
         </div>

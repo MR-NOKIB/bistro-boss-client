@@ -23,7 +23,7 @@ const AuthProvider = ({ children }) => {
         setLoading(true)
         return signInWithPopup(auth, googleProvider)
     }
-    
+
     const signIn = (email, password) => {
         setLoading(true);
         return signInWithEmailAndPassword(auth, email, password);
@@ -57,14 +57,15 @@ const AuthProvider = ({ children }) => {
                     .then(res => {
                         if (res.data.token) {
                             localStorage.setItem('access-token', res.data.token)
+                            setLoading(false);
                         }
                     })
             }
             else {
                 // TODO: remove token (if token stored in the client site: localStorage , caching ,in memory)
                 localStorage.removeItem('access-token')
+                setLoading(false);
             }
-            setLoading(false);
         });
 
         return () => {
